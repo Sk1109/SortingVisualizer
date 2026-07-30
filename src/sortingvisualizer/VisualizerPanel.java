@@ -1,14 +1,58 @@
 package sortingvisualizer;
 
 import javax.swing.JPanel;
+import javax.swing.Timer;
 import java.awt.Graphics;
 import java.awt.Color;
+import java.awt.event.ActionListener;
 
 public class VisualizerPanel extends JPanel {
-	private ArrayState state;
 
-	public VisualizerPanel(ArrayState state) {
+	private ArrayState state;
+	private SortAlgorithms algorithms;
+	private Timer timer;
+	private String activeSort = "";
+
+	public VisualizerPanel(ArrayState state, SortAlgorithms algorithms) {
 		this.state = state;
+		this.algorithms = algorithms;
+
+		timer = new Timer(20, e -> runStep());
+	}
+
+	private void runStep() {
+		if (activeSort.equals("bubble")) {
+			if (!algorithms.isBubbleFinished()) {
+				algorithms.bubbleSortStep(state);
+			} else {
+				timer.stop();
+			}
+		} else if (activeSort.equals("insertion")) {
+			if (!algorithms.isInsertFinished()) {
+				algorithms.insertionSortStep(state);
+			} else {
+				timer.stop();
+			}
+		}
+		repaint();
+	}
+
+	public void startBubbleSort() {
+		activeSort = "bubble";
+		algorithms.resetBubbleSort();
+		timer.start();
+	}
+
+	public void startInsertionSort() {
+		activeSort = "insertion";
+		algorithms.resetInsertionSort();
+		timer.start();
+	}
+
+	public void regenerateArray() {
+		timer.stop();
+		state.generateRandomArray();
+		repaint();
 	}
 
 	@Override
@@ -38,5 +82,4 @@ public class VisualizerPanel extends JPanel {
 			g.fillRect(x, y, barWidth - 2, barHeight);
 		}
 	}
-
 }
