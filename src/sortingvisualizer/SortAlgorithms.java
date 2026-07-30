@@ -92,10 +92,16 @@ public class SortAlgorithms {
 			} else {
 				insertShifting = false;
 				insertI++;
+				for (int i = 0; i < insertI; i++) {
+			        state.markSorted(i);
+			    }
 			}
 		} else {
 			insertShifting = false;
 			insertI++;
+			for (int i = 0; i < insertI; i++) {
+		        state.markSorted(i);
+		    }
 		}
 	}
 }

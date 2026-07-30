@@ -21,6 +21,12 @@ public class ArrayState {
 		comparingIndex2 = -1;
 	}
 
+	public void clearSorted() {
+		for (int i = 0; i < sorted.length; i++) {
+			sorted[i] = false;
+		}
+	}
+
 	public int[] getValues() {
 		return values;
 	}

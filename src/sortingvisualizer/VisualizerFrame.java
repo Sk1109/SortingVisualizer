@@ -9,7 +9,7 @@ public class VisualizerFrame extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        ArrayState state = new ArrayState(50);
+        ArrayState state = new ArrayState(10);
         SortAlgorithms algorithms = new SortAlgorithms();
         VisualizerPanel panel = new VisualizerPanel(state, algorithms);
 
