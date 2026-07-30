@@ -4,7 +4,8 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 import java.awt.Graphics;
 import java.awt.Color;
-import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class VisualizerPanel extends JPanel {
 
@@ -12,12 +13,39 @@ public class VisualizerPanel extends JPanel {
 	private SortAlgorithms algorithms;
 	private Timer timer;
 	private String activeSort = "";
+	private String selectedAlgorithm = "bubble";
 
 	public VisualizerPanel(ArrayState state, SortAlgorithms algorithms) {
 		this.state = state;
 		this.algorithms = algorithms;
 
 		timer = new Timer(20, e -> runStep());
+
+		setFocusable(true);
+		addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				handleKeyPress(e);
+			}
+		});
+	}
+
+	private void handleKeyPress(KeyEvent e) {
+		int key = e.getKeyCode();
+
+		if (key == KeyEvent.VK_R) {
+			regenerateArray();
+		} else if (key == KeyEvent.VK_B) {
+			selectedAlgorithm = "bubble";
+		} else if (key == KeyEvent.VK_I) {
+			selectedAlgorithm = "insertion";
+		} else if (key == KeyEvent.VK_SPACE) {
+			if (selectedAlgorithm.equals("bubble")) {
+				startBubbleSort();
+			} else {
+				startInsertionSort();
+			}
+		}
 	}
 
 	private void runStep() {
@@ -51,6 +79,7 @@ public class VisualizerPanel extends JPanel {
 
 	public void regenerateArray() {
 		timer.stop();
+		activeSort = "";
 		state.generateRandomArray();
 		repaint();
 	}
