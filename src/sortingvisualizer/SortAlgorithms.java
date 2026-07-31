@@ -5,15 +5,19 @@ public class SortAlgorithms {
 	private int bubbleI = 0;
 	private int bubbleJ = 0;
 	private boolean bubbleFinished = false;
+	private boolean bubbleWaitingToSwap = false;
 
 	public boolean isBubbleFinished() {
 		return bubbleFinished;
 	}
+	
 
 	public void resetBubbleSort() {
 		bubbleI = 0;
 		bubbleJ = 0;
 		bubbleFinished = false;
+		bubbleWaitingToSwap = false;
+
 	}
 
 	// Performs ONE comparison (and possibly one swap) of Bubble Sort
@@ -26,11 +30,23 @@ public class SortAlgorithms {
 
 		if (bubbleI < n - 1) {
 			if (bubbleJ < n - bubbleI - 1) {
-				state.setComparing(bubbleJ, bubbleJ + 1);
-
 				int[] values = state.getValues();
+
+				// FIRST TIMER TICK:
+				// Highlight the bars only.
+				if (!bubbleWaitingToSwap) {
+					state.setComparing(bubbleJ, bubbleJ + 1);
+					bubbleWaitingToSwap = true;
+					return;
+				}
+
+				// SECOND TIMER TICK:
+				// Perform the comparison/swap.
+				bubbleWaitingToSwap = false;
+
 				if (values[bubbleJ] > values[bubbleJ + 1]) {
 					state.swap(bubbleJ, bubbleJ + 1);
+					state.clearComparing();
 				}
 
 				bubbleJ++;
@@ -93,15 +109,15 @@ public class SortAlgorithms {
 				insertShifting = false;
 				insertI++;
 				for (int i = 0; i < insertI; i++) {
-			        state.markSorted(i);
-			    }
+					state.markSorted(i);
+				}
 			}
 		} else {
 			insertShifting = false;
 			insertI++;
 			for (int i = 0; i < insertI; i++) {
-		        state.markSorted(i);
-		    }
+				state.markSorted(i);
+			}
 		}
 	}
 }
