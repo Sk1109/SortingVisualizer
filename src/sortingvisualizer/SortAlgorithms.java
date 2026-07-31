@@ -10,7 +10,6 @@ public class SortAlgorithms {
 	public boolean isBubbleFinished() {
 		return bubbleFinished;
 	}
-	
 
 	public void resetBubbleSort() {
 		bubbleI = 0;
@@ -67,6 +66,7 @@ public class SortAlgorithms {
 	private int insertJ = 0;
 	private boolean insertShifting = false;
 	private boolean insertFinished = false;
+	private boolean insertWaitingToSwap = false;
 
 	public boolean isInsertFinished() {
 		return insertFinished;
@@ -77,10 +77,12 @@ public class SortAlgorithms {
 		insertJ = 0;
 		insertShifting = false;
 		insertFinished = false;
+		insertWaitingToSwap = false;
 	}
 
-	// Performs ONE comparison (and possibly one swap) of Insertion Sort
+	// Performs ONE animation step of Insertion Sort
 	public void insertionSortStep(ArrayState state) {
+
 		if (insertFinished) {
 			return;
 		}
@@ -88,6 +90,10 @@ public class SortAlgorithms {
 		int n = state.size();
 
 		if (insertI >= n) {
+			for (int i = 0; i < n; i++) {
+				state.markSorted(i);
+			}
+			state.clearComparing();
 			insertFinished = true;
 			return;
 		}
@@ -100,24 +106,37 @@ public class SortAlgorithms {
 		int[] values = state.getValues();
 
 		if (insertJ > 0) {
-			state.setComparing(insertJ - 1, insertJ);
+
+			// FIRST TIMER TICK
+			if (!insertWaitingToSwap) {
+				state.setComparing(insertJ - 1, insertJ);
+				insertWaitingToSwap = true;
+				return;
+			}
+
+			// SECOND TIMER TICK
+			insertWaitingToSwap = false;
 
 			if (values[insertJ - 1] > values[insertJ]) {
+
 				state.swap(insertJ - 1, insertJ);
+				state.clearComparing();
 				insertJ--;
+
 			} else {
+
+				state.clearComparing();
 				insertShifting = false;
 				insertI++;
-				for (int i = 0; i < insertI; i++) {
-					state.markSorted(i);
-				}
+
 			}
+
 		} else {
+
+			state.clearComparing();
 			insertShifting = false;
 			insertI++;
-			for (int i = 0; i < insertI; i++) {
-				state.markSorted(i);
-			}
+
 		}
 	}
 }

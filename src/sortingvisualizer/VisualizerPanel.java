@@ -48,11 +48,10 @@ public class VisualizerPanel extends JPanel {
 		}
 	}
 
-
 	public void startBubbleSort() {
 		if (timer.isRunning()) {
-	        return;
-	    }
+			return;
+		}
 		state.clearSorted();
 		activeSort = "bubble";
 		algorithms.resetBubbleSort();
@@ -61,8 +60,8 @@ public class VisualizerPanel extends JPanel {
 
 	public void startInsertionSort() {
 		if (timer.isRunning()) {
-	        return;
-	    }
+			return;
+		}
 		state.clearSorted();
 		activeSort = "insertion";
 		algorithms.resetInsertionSort();
@@ -75,7 +74,7 @@ public class VisualizerPanel extends JPanel {
 		state.generateRandomArray();
 		repaint();
 	}
-	
+
 	private void runStep() {
 		if (activeSort.equals("bubble")) {
 			if (!algorithms.isBubbleFinished()) {
@@ -106,15 +105,15 @@ public class VisualizerPanel extends JPanel {
 
 		for (int i = 0; i < n; i++) {
 			int barHeight = values[i];
-			int x = 5+ i * barWidth;
+			int x = 5 + i * barWidth;
 			int y = panelHeight - barHeight;
 
 			if (state.isComparing(i)) {
-			    g.setColor(Color.RED);
+				g.setColor(Color.RED);
 			} else if (state.isSorted(i)) {
-			    g.setColor(Color.GREEN);
+				g.setColor(Color.GREEN);
 			} else {
-			    g.setColor(Color.BLUE);
+				g.setColor(Color.BLUE);
 			}
 
 			g.fillRect(x, y, barWidth - 5, barHeight);

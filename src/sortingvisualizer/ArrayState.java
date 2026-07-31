@@ -20,10 +20,10 @@ public class ArrayState {
 		comparingIndex1 = -1;
 		comparingIndex2 = -1;
 	}
-	
+
 	public void clearComparing() {
-	    comparingIndex1 = -1;
-	    comparingIndex2 = -1;
+		comparingIndex1 = -1;
+		comparingIndex2 = -1;
 	}
 
 	public void clearSorted() {
