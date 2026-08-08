@@ -1,0 +1,54 @@
+# 🔀 Sorting Visualizer (Java + Swing)
+
+A simple and interactive Java desktop application that visualizes **Bubble Sort** and **Insertion Sort** in real time, built using Java's built-in Swing library.
+
+This project was built from scratch as a personal learning exercise, inspired by a friend's Python + Pygame version of the same concept — reimagined and independently coded in Java.
+
+## 🚀 Features
+
+- Visualizes sorting step-by-step in real time (not an instant jump to the sorted result)
+- Supports:
+  - 🫧 Bubble Sort
+  - 🧩 Insertion Sort
+- Color-coded bars representing data values:
+  - 🔵 Blue → normal / unsorted
+  - 🔴 Red → currently being compared
+  - 🟢 Green → sorted
+- Clean UI built using Java Swing
+- Keyboard controls to regenerate the array, select an algorithm, and start sorting
+
+## 🎮 Controls
+
+- **R** — Generate a new random array
+- **B** — Select Bubble Sort
+- **I** — Select Insertion Sort
+- **SPACE** — Start sorting with the selected algorithm
+
+
+## 🛠 Requirements
+
+- JDK 17 or newer (built and tested on JDK 21)
+- No external libraries needed — Swing and AWT ship with the JDK
+
+## ▶️ How to Run
+
+1. Clone this repository
+2. Open the project in Eclipse (or any Java IDE) as an existing Java project
+3. Right-click `Main.java` → **Run As → Java Application**
+4. Click inside the opened window once (to give it keyboard focus), then use the controls above
+
+## 📁 Project Structure
+```
+SortingVisualizer/
+  src/
+    sortingvisualizer/
+      Main.java              - Entry point, launches the app
+      VisualizerFrame.java   - The window (JFrame)
+      VisualizerPanel.java   - Drawing surface, Timer, and keyboard input
+      ArrayState.java        - Data model (array values, compare/sorted state)
+      SortAlgorithms.java    - Bubble Sort and Insertion Sort, step-by-step
+```
+
+## 👤 Author
+
+Built by Sourabh.

@@ -19,7 +19,7 @@ public class VisualizerPanel extends JPanel {
 		this.state = state;
 		this.algorithms = algorithms;
 
-		timer = new Timer(1500, e -> runStep());
+		timer = new Timer(1000, e -> runStep());
 
 		setFocusable(true);
 		addKeyListener(new KeyAdapter() {
