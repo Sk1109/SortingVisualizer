@@ -45,9 +45,8 @@ public class SortAlgorithms {
 
 				if (values[bubbleJ] > values[bubbleJ + 1]) {
 					state.swap(bubbleJ, bubbleJ + 1);
-					state.clearComparing();
 				}
-
+				state.clearComparing();
 				bubbleJ++;
 			} else {
 				state.markSorted(n - bubbleI - 1);
